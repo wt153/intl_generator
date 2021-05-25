@@ -27,7 +27,7 @@ import 'package:analyzer/dart/ast/standard_ast_factory.dart';
 import 'package:analyzer/dart/ast/token.dart';
 import 'package:analyzer/dart/ast/visitor.dart';
 import 'package:analyzer/src/dart/ast/constant_evaluator.dart';
-import 'package:intl_translation/src/intl_message.dart';
+import 'package:intl_generator/src/intl_message.dart';
 
 export 'src/arb_generation.dart';
 

@@ -12,9 +12,9 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:args/args.dart';
-import 'package:intl_translation/extract_messages.dart';
-import 'package:intl_translation/src/arb_generation.dart';
-import 'package:intl_translation/src/directory_utils.dart';
+import 'package:intl_generator/extract_messages.dart';
+import 'package:intl_generator/src/arb_generation.dart';
+import 'package:intl_generator/src/directory_utils.dart';
 import 'package:path/path.dart' as path;
 
 main(List<String> args) {

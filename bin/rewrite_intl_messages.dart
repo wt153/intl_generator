@@ -15,7 +15,7 @@ import 'dart:io';
 
 import 'package:args/args.dart';
 import 'package:dart_style/dart_style.dart';
-import 'package:intl_translation/src/message_rewriter.dart';
+import 'package:intl_generator/src/message_rewriter.dart';
 
 String outputFileOption = 'transformed_output.dart';
 

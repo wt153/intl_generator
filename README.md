@@ -1,4 +1,4 @@
-Intl_translation
+Intl_generator
 ====
 
 This package provides message extraction and code generation from translated
@@ -13,7 +13,7 @@ results need to be incorporated.
 
 To extract messages, run the `extract_to_arb.dart` program.
 
-      pub run intl_translation:extract_to_arb --output-dir=target/directory
+      pub run intl_generator:extract_to_arb --output-dir=target/directory
           my_program.dart more_of_my_program.dart
 
 This will produce a file `intl_messages.arb` with the messages from all of these
@@ -27,7 +27,7 @@ This expects to receive a series of files, one per
 locale.
 
 ```
-pub run intl_translation:generate_from_arb --generated-file-prefix=<prefix>
+pub run intl_generator:generate_from_arb --generated-file-prefix=<prefix>
     <my_dart_files> <translated_ARB_files>
 ```
 

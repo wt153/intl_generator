@@ -12,6 +12,7 @@
 library data_directory;
 
 import "dart:io";
+
 import "package:path/path.dart" as path;
 
 /// Returns whether [dir] is the root of the `intl` package. We validate that it
@@ -19,7 +20,7 @@ import "package:path/path.dart" as path;
 bool _isIntlRoot(String dir) {
   var file = new File(path.join(dir, 'pubspec.yaml'));
   if (!file.existsSync()) return false;
-  return file.readAsStringSync().contains('name: intl_translation\n');
+  return file.readAsStringSync().contains('name: intl_generator\n');
 }
 
 String get packageDirectory {
@@ -36,5 +37,5 @@ String get packageDirectory {
     dir = path.dirname(dir);
   }
   throw new UnsupportedError(
-      'Cannot find the root directory of the `intl_translation` package.');
+      'Cannot find the root directory of the `intl_generator` package.');
 }

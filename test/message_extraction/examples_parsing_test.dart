@@ -6,7 +6,7 @@
 /// minimal so far.
 import 'dart:io';
 
-import 'package:intl_translation/extract_messages.dart';
+import 'package:intl_generator/extract_messages.dart';
 import 'package:path/path.dart' as path;
 @Timeout(const Duration(seconds: 180))
 import 'package:test/test.dart';
