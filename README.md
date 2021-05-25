@@ -1,6 +1,8 @@
 Intl_generator
 ====
 
+This is a fork of intl_translation to have an up to date version.
+ 
 This package provides message extraction and code generation from translated
 messages for the [Intl][Intl] package. It's a separate package so as to not
 require a dependency on analyzer for all users.
