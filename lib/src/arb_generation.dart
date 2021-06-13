@@ -43,9 +43,12 @@ Map arbMetadata(MainMessage message) {
   }
   out["type"] = "text";
   var placeholders = {};
+  var placeholderNames = [];
   for (var arg in message.arguments) {
+    placeholderNames.add(arg);
     addArgumentFor(message, arg, placeholders);
   }
+  out["placeholders_order"] = placeholderNames;
   out["placeholders"] = placeholders;
   return out;
 }

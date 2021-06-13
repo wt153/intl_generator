@@ -3,7 +3,7 @@ Intl_generator
 
 This is a fork of intl_translation to have an up to date version.
 
-If you prefer having translations as part of your build_runner process or need to support flavors, please check [intl_flavors](https://pub.dev/packages/intl_flavor)
+If you prefer having translations as part of your build_runner process or need to support flavors, please check [intl_flavors](https://pub.dev/packages/intl_flavors)
 
 This package provides message extraction and code generation from translated
 messages for the [Intl][Intl] package. It's a separate package so as to not

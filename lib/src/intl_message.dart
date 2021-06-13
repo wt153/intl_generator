@@ -409,7 +409,7 @@ class VariableSubstitution extends Message {
   /// The name of the variable in the parameter list of the containing function.
   /// Used when generating code for the interpolation.
   String get variableName =>
-      _variableName == null ? _variableName = arguments[index] : _variableName;
+      _variableName == null ? (index == null ? _variableName = _variableNameUpper : _variableName = arguments[index]) : _variableName;
   String? _variableName;
   // Although we only allow simple variable references, we always enclose them
   // in curly braces so that there's no possibility of ambiguity with
