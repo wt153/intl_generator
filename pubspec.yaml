@@ -1,5 +1,5 @@
 name: intl_generator
-version: 0.2.0+1
+version: 0.2.1
 description: >-
   Contains code to deal with internationalized/localized messages,
   date and number formatting and parsing, bi-directional text, and
@@ -11,11 +11,11 @@ environment:
 
 dependencies:
   collection: ">=1.15.0 <2.0.0"
-  analyzer: ^2.2.0
+  analyzer: ">=2.0.0 <3.0.0"
   args: ">=2.1.0 <3.0.0"
-  dart_style: ^2.0.1
+  dart_style: ^2.2.0
   intl: ">=0.17.0 <0.20.0"
   path: ">=1.8.0 <2.0.0"
-  petitparser: ^4.1.0
+  petitparser: ^4.3.0
 dev_dependencies:
-  test: ^1.17.4
+  test: ^1.17.12

@@ -1,7 +1,8 @@
 # Changelog
 
-## 0.2.0+0
- * bump analyzer to 2.2.0
+## 0.2.1
+ * bump deps
+
 ## 0.2.0+0
   * add placeholders order in metadata
 
