@@ -23,7 +23,7 @@ import 'dart:io';
 
 import 'package:analyzer/dart/analysis/utilities.dart';
 import 'package:analyzer/dart/ast/ast.dart';
-import 'package:analyzer/dart/ast/standard_ast_factory.dart';
+import 'package:analyzer/src/dart/ast/ast_factory.dart';
 import 'package:analyzer/dart/ast/token.dart';
 import 'package:analyzer/dart/ast/visitor.dart';
 import 'package:analyzer/src/dart/ast/constant_evaluator.dart';
@@ -169,8 +169,8 @@ class MessageFindingVisitor extends GeneralizingAstVisitor {
   FormalParameterList? parameters;
   String name = '';
 
-  final FormalParameterList _emptyParameterList =
-      astFactory.formalParameterList(Token.eof(0), [], null, null, Token.eof(0));
+  final FormalParameterList _emptyParameterList = astFactory
+      .formalParameterList(Token.eof(0), [], null, null, Token.eof(0));
 
   /// Return true if [node] matches the pattern we expect for Intl.message()
   bool looksLikeIntlMessage(MethodInvocation node) {
@@ -373,8 +373,12 @@ class MessageFindingVisitor extends GeneralizingAstVisitor {
     var message = new MainMessage();
     message.sourcePosition = node.offset;
     message.endPosition = node.end;
-    message.arguments =
-        parameters?.parameters.map((x) => x.identifier?.name).where((element) => element !=null).cast<String>().toList() ?? [];
+    message.arguments = parameters?.parameters
+            .map((x) => x.identifier?.name)
+            .where((element) => element != null)
+            .cast<String>()
+            .toList() ??
+        [];
     var arguments = node.argumentList.arguments;
     var extractionResult = extract(message, arguments);
     if (extractionResult == null) return null;
@@ -433,7 +437,8 @@ class MessageFindingVisitor extends GeneralizingAstVisitor {
       try {
         // The pieces of the message, either literal strings, or integers
         // representing the index of the argument to be substituted.
-        List<Object> extracted = _extractFromIntlCallWithInterpolation(message, arguments);
+        List<Object> extracted =
+            _extractFromIntlCallWithInterpolation(message, arguments);
         message?.addPieces(extracted);
       } on IntlMessageExtractionException catch (e) {
         message = null;
@@ -524,7 +529,8 @@ class InterpolationVisitor extends SimpleAstVisitor {
   }
 
   void lookForPluralOrGender(InterpolationExpression node) {
-    var visitor = new PluralAndGenderVisitor(pieces, message as ComplexMessage?, extraction);
+    var visitor = new PluralAndGenderVisitor(
+        pieces, message as ComplexMessage?, extraction);
     node.accept(visitor);
     if (!visitor.foundPluralOrGender) {
       throw new IntlMessageExtractionException(
@@ -571,7 +577,8 @@ class PluralAndGenderVisitor extends SimpleAstVisitor {
     if (!looksLikePluralOrGender(node.expression)) return;
     var reason = checkValidity(node.expression as MethodInvocation?);
     if (reason != null) throw reason;
-    var message = messageFromMethodInvocation(node.expression as MethodInvocation);
+    var message =
+        messageFromMethodInvocation(node.expression as MethodInvocation);
     foundPluralOrGender = true;
     pieces.add(message);
     super.visitInterpolationExpression(node);
