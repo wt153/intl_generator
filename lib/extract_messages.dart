@@ -218,7 +218,7 @@ class MessageFindingVisitor extends GeneralizingAstVisitor {
   /// Record the parameters of the function or method declaration we last
   /// encountered before seeing the Intl.message call.
   void visitMethodDeclaration(MethodDeclaration node) {
-    name = node.name2.lexeme;
+    name = node.name.lexeme;
     parameters = node.parameters;
     if (parameters == null && node.propertyKeyword?.lexeme == 'get') {
       parameters = _emptyParameterList;
@@ -231,7 +231,7 @@ class MessageFindingVisitor extends GeneralizingAstVisitor {
   /// Record the parameters of the function or method declaration we last
   /// encountered before seeing the Intl.message call.
   void visitFunctionDeclaration(FunctionDeclaration node) {
-    name = node.name2.lexeme;
+    name = node.name.lexeme;
     parameters = node.functionExpression.parameters;
     if (parameters == null && node.propertyKeyword?.lexeme == 'get') {
       parameters = _emptyParameterList;
@@ -247,7 +247,7 @@ class MessageFindingVisitor extends GeneralizingAstVisitor {
     // We don't support names in list declarations,
     // e.g. String first, second = Intl.message(...);
     if (node.fields.variables.length == 1) {
-      name = node.fields.variables.first.name2.lexeme;
+      name = node.fields.variables.first.name.lexeme;
     } else {
       name = '';
     }
@@ -263,7 +263,7 @@ class MessageFindingVisitor extends GeneralizingAstVisitor {
     // We don't support names in list declarations,
     // e.g. String first, second = Intl.message(...);
     if (node.variables.variables.length == 1) {
-      name = node.variables.variables.first.name2.lexeme;
+      name = node.variables.variables.first.name.lexeme;
     } else {
       name = '';
     }
