@@ -8,6 +8,7 @@ import 'dart:io';
 
 import 'package:intl_generator/extract_messages.dart';
 import 'package:path/path.dart' as path;
+// ignore: invalid_annotation_target
 @Timeout(const Duration(seconds: 180))
 import 'package:test/test.dart';
 
