@@ -142,7 +142,8 @@ Future<ProcessResult> run(
 Future<ProcessResult> _runPubGet() {
   return Process.run(dart, ['pub', 'get'],
       workingDirectory: tempDir,
-      stdoutEncoding: new Utf8Codec(), stderrEncoding: new Utf8Codec());
+      stdoutEncoding: new Utf8Codec(),
+      stderrEncoding: new Utf8Codec());
 }
 
 checkResult(ProcessResult? previousResult) {
