@@ -19,5 +19,3 @@ dependencies:
   petitparser: ">=5.0.0 <6.0.0"
 dev_dependencies:
   test: ^1.21.1
-dependency_overrides:
-  analyzer: ">=5.1.0 <6.0.0"
