@@ -25,7 +25,7 @@ import 'package:analyzer/dart/analysis/utilities.dart';
 import 'package:analyzer/dart/ast/ast.dart';
 import 'package:analyzer/dart/ast/token.dart';
 import 'package:analyzer/dart/ast/visitor.dart';
-import 'package:analyzer/src/dart/ast/ast_factory.dart';
+import 'package:analyzer/src/dart/ast/ast.dart';
 import 'package:analyzer/src/dart/ast/constant_evaluator.dart';
 import 'package:intl_generator/src/intl_message.dart';
 
@@ -166,8 +166,8 @@ class MessageFindingVisitor extends GeneralizingAstVisitor {
   FormalParameterList? parameters;
   String name = '';
 
-  final FormalParameterList _emptyParameterList = astFactory
-      .formalParameterList(Token.eof(0), [], null, null, Token.eof(0));
+  final FormalParameterList _emptyParameterList =
+      FormalParameterListImpl(Token.eof(0), [], null, null, Token.eof(0));
 
   /// Return true if [node] matches the pattern we expect for Intl.message()
   bool looksLikeIntlMessage(MethodInvocation node) {
