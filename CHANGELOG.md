@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.4.0
+* bump deps to support last analyzer v5
+
 ## 0.3.0
  * bump deps to support last petitparser and analyzer
 
