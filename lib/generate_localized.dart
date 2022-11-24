@@ -98,7 +98,8 @@ class MessageGeneration {
     // original message (e.g. if we're using some messages from a larger
     // catalog)
     var usableTranslations = translations
-        .where((each) => each.originalMessages.isNotEmpty && each.message != null)
+        .where(
+            (each) => each.originalMessages.isNotEmpty && each.message != null)
         .toList();
     for (var each in usableTranslations) {
       for (var original in each.originalMessages) {
@@ -137,11 +138,13 @@ class MessageGeneration {
             .expand((translation) => translation.originalMessages)
             .toSet()
             .toList()
-              ..sort((a, b) => a.name.compareTo(b.name)))
+          ..sort((a, b) => a.name.compareTo(b.name)))
         .map((original) =>
             '    "${original.escapeAndValidateString(original.name)}" '
             ': ${_mapReference(original, locale)}');
-    output..write(entries.join(",\n"))..write("\n  };\n}\n");
+    output
+      ..write(entries.join(",\n"))
+      ..write("\n  };\n}\n");
   }
 
   /// Any additional imports the individual message files need.

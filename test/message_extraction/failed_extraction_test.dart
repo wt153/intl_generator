@@ -46,7 +46,9 @@ void runTestWithWarnings(
     args.add('--no-embedded-plurals');
   }
   var files = sourceFiles.map((x) => asTempDirPath(x)!).toList();
-  List<String> allArgs = [program]..addAll(args)..addAll(files);
+  List<String> allArgs = [program]
+    ..addAll(args)
+    ..addAll(files);
   var callback = expectAsync1(verify);
 
   run(null, allArgs).then(callback);

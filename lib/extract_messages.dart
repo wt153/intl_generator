@@ -23,9 +23,9 @@ import 'dart:io';
 
 import 'package:analyzer/dart/analysis/utilities.dart';
 import 'package:analyzer/dart/ast/ast.dart';
-import 'package:analyzer/src/dart/ast/ast_factory.dart';
 import 'package:analyzer/dart/ast/token.dart';
 import 'package:analyzer/dart/ast/visitor.dart';
+import 'package:analyzer/src/dart/ast/ast.dart';
 import 'package:analyzer/src/dart/ast/constant_evaluator.dart';
 import 'package:intl_generator/src/intl_message.dart';
 
@@ -137,11 +137,8 @@ class MessageExtraction {
     var result = new StringBuffer();
     if (origin != null) result.write("    from $origin");
     var info = root.lineInfo;
-    if (info != null) {
-      var line = info.getLocation(node.offset);
-      result
-          .write("    line: ${line.lineNumber}, column: ${line.columnNumber}");
-    }
+    var line = info.getLocation(node.offset);
+    result.write("    line: ${line.lineNumber}, column: ${line.columnNumber}");
     return result.toString();
   }
 }
@@ -169,8 +166,13 @@ class MessageFindingVisitor extends GeneralizingAstVisitor {
   FormalParameterList? parameters;
   String name = '';
 
-  final FormalParameterList _emptyParameterList = astFactory
-      .formalParameterList(Token.eof(0), [], null, null, Token.eof(0));
+  final FormalParameterList _emptyParameterList = FormalParameterListImpl(
+    leftParenthesis: Token.eof(0),
+    parameters: [],
+    leftDelimiter: null,
+    rightDelimiter: null,
+    rightParenthesis: Token.eof(0),
+  );
 
   /// Return true if [node] matches the pattern we expect for Intl.message()
   bool looksLikeIntlMessage(MethodInvocation node) {
@@ -221,7 +223,7 @@ class MessageFindingVisitor extends GeneralizingAstVisitor {
   /// Record the parameters of the function or method declaration we last
   /// encountered before seeing the Intl.message call.
   void visitMethodDeclaration(MethodDeclaration node) {
-    name = node.name.name;
+    name = node.name.lexeme;
     parameters = node.parameters;
     if (parameters == null && node.propertyKeyword?.lexeme == 'get') {
       parameters = _emptyParameterList;
@@ -234,7 +236,7 @@ class MessageFindingVisitor extends GeneralizingAstVisitor {
   /// Record the parameters of the function or method declaration we last
   /// encountered before seeing the Intl.message call.
   void visitFunctionDeclaration(FunctionDeclaration node) {
-    name = node.name.name;
+    name = node.name.lexeme;
     parameters = node.functionExpression.parameters;
     if (parameters == null && node.propertyKeyword?.lexeme == 'get') {
       parameters = _emptyParameterList;
@@ -250,7 +252,7 @@ class MessageFindingVisitor extends GeneralizingAstVisitor {
     // We don't support names in list declarations,
     // e.g. String first, second = Intl.message(...);
     if (node.fields.variables.length == 1) {
-      name = node.fields.variables.first.name.name;
+      name = node.fields.variables.first.name.lexeme;
     } else {
       name = '';
     }
@@ -266,7 +268,7 @@ class MessageFindingVisitor extends GeneralizingAstVisitor {
     // We don't support names in list declarations,
     // e.g. String first, second = Intl.message(...);
     if (node.variables.variables.length == 1) {
-      name = node.variables.variables.first.name.name;
+      name = node.variables.variables.first.name.lexeme;
     } else {
       name = '';
     }
@@ -374,7 +376,7 @@ class MessageFindingVisitor extends GeneralizingAstVisitor {
     message.sourcePosition = node.offset;
     message.endPosition = node.end;
     message.arguments = parameters?.parameters
-            .map((x) => x.identifier?.name)
+            .map((x) => x.name?.lexeme)
             .where((element) => element != null)
             .cast<String>()
             .toList() ??
