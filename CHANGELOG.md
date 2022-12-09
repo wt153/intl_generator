@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.4.1
+* fix compilation error
+
 ## 0.4.0
 * bump deps to support last analyzer v5
 

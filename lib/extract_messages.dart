@@ -167,11 +167,11 @@ class MessageFindingVisitor extends GeneralizingAstVisitor {
   String name = '';
 
   final FormalParameterList _emptyParameterList = FormalParameterListImpl(
-    Token.eof(0),
-    [],
-    null,
-    null,
-    Token.eof(0),
+    leftParenthesis: Token.eof(0),
+    parameters: [],
+    leftDelimiter: null,
+    rightDelimiter: null,
+    rightParenthesis: Token.eof(0),
   );
 
   /// Return true if [node] matches the pattern we expect for Intl.message()
