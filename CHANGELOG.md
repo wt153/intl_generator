@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.4.2
+* update petitparser to 6.0.0
+
 ## 0.4.1
 * fix compilation error
 
